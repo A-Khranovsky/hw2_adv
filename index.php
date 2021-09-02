@@ -1,43 +1,51 @@
 <?php
-class Color {
-    private int $red;
-    private int $green;
-    private int $blue;
+class MyColor
+{
+    private $red;
+    private $green;
+    private $blue;
 
-    private function setRedValue(int $value){
-        $this->red = $value;
+    private function setRedValue(int $redValue):void
+    {
+        $this->red = $redValue;
     }
-    private function setGreenValue(int $value){
-        $this->green = $value;
+    private function setGreenValue(int $greenValue):void
+    {
+        $this->green = $greenValue;
     }
-    private function setBlueValue(int $value){
-        $this->blue = $value;
+    private function setBlueValue(int $blueValue):void
+    {
+        $this->blue = $blueValue;
     }
 
-    public function getRedValue(): int{
+    public function getRedValue():int
+    {
         return $this->red;
     }
-    public function getGreenValue(): int{
+    public function getGreenValue():int
+    {
         return $this->green;
     }
-    public function getBlueValue(): int{
+    public function getBlueValue():int
+    {
         return $this->blue;
     }
 
-    public function __construct(int $_red, int $_green, int $_blue) {
+    public function __construct(int $_red, int $_green, int $_blue)
+    {
         $this->setRedValue($_red);
         $this->setGreenValue($_green);
         $this->setBlueValue($_blue);
     }
 
-    public function View(): string{
+    public function View(){
         return 'red= '.$this->getRedValue().' green = '.$this->getGreenValue().' blue = '.$this->getBlueValue();
     }
 
 }
 
-$color = new Color(200, 200, 200);
-$color->View();
+$color = new MyColor(200, 200, 200);
+echo $color->View();
 
 //$mixedColor = $color->mix(new Color(100, 100, 100));
 //$mixedColor->getRed(); // 150
@@ -47,3 +55,4 @@ $color->View();
 //if (!$color->equals($mixedColor)) {
 //    echo 'Цвета не равні';
 //}
+?>
