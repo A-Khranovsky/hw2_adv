@@ -5,16 +5,39 @@ class MyColor
     private $green;
     private $blue;
 
+    private $errorBag = [
+    'red' => [],
+    'green' => [],
+    'blue' => []
+    ];
     private function setRedValue(int $redValue):void
     {
+        if ($redValue < 0) {
+            $this->errorBag['red'] [] = 'Значение красного не должно быть меньше нуля';
+        }
+        if ($redValue > 255) {
+            $this->errorBag['red'] [] = 'Значение красного не должно быть больше 255';
+        }
         $this->red = $redValue;
     }
     private function setGreenValue(int $greenValue):void
     {
+        if ($greenValue < 0) {
+            $this->errorBag['red'] [] = 'Значение зеленого не должно быть меньше нуля';
+        }
+        if ($greenValue > 255) {
+            $this->errorBag['red'] [] = 'Значение зеленого не должно быть больше 255';
+        }
         $this->green = $greenValue;
     }
     private function setBlueValue(int $blueValue):void
     {
+        if ($blueValue < 0) {
+            $this->errorBag['red'] [] = 'Значение синего не должно быть меньше нуля';
+        }
+        if ($blueValue > 255) {
+            $this->errorBag['red'] [] = 'Значение синего не должно быть больше 255';
+        }
         $this->blue = $blueValue;
     }
 
@@ -36,6 +59,22 @@ class MyColor
         $this->setRedValue($_red);
         $this->setGreenValue($_green);
         $this->setBlueValue($_blue);
+        $this ->checkErrors();
+    }
+    private function checkErrors():void
+    {
+        $errorsCounter = count(
+            $this->errorBag['red'] +
+            $this->errorBag['green'] +
+            $this->errorBag['blue']
+        );
+        if ($errorsCounter > 0) {
+            foreach ($this->errorBag as $item){
+                foreach ($item as $item_item )
+                echo $item_item.'<br>';
+            }
+            exit();
+        }
     }
 
     public function View(){
