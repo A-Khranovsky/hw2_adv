@@ -81,10 +81,23 @@ class MyColor
         return 'red= '.$this->getRedValue().' green = '.$this->getGreenValue().' blue = '.$this->getBlueValue();
     }
 
+    public function equals (MyColor $value) :bool {
+        return (
+            $this->red == $value->getRedValue()
+            &&
+            $this->green == $value->getGreenValue()
+            &&
+            $this->blue == $value->getBlueValue()
+            );
+    }
+
 }
 
 $color = new MyColor(200, 200, 200);
+$color1 = new MyColor(200, 200, 200);
 echo $color->View();
+echo '<br>';
+echo $color->equals($color1);
 
 //$mixedColor = $color->mix(new Color(100, 100, 100));
 //$mixedColor->getRed(); // 150
