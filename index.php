@@ -1,9 +1,10 @@
 <?php
+
 class MyColor
 {
-    private $red;
-    private $green;
-    private $blue;
+    private int $red;
+    private int $green;
+    private int $blue;
 
     private $errorBag = [
     'red' => [],
@@ -94,7 +95,7 @@ class MyColor
 }
 
 $color = new MyColor(200, 200, 200);
-$color1 = new MyColor(200, 200, 200);
+$color1 = new MyColor(200, 200, 300);
 echo $color->View();
 echo '<br>';
 echo $color->equals($color1);
