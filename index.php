@@ -24,20 +24,20 @@ class Color
     private function setGreenValue(int $greenValue):void
     {
         if ($greenValue < 0) {
-            $this->errorBag['red'] [] = 'Значение зеленого не должно быть меньше нуля';
+            $this->errorBag['green'] [] = 'Значение зеленого не должно быть меньше нуля';
         }
         if ($greenValue > 255) {
-            $this->errorBag['red'] [] = 'Значение зеленого не должно быть больше 255';
+            $this->errorBag['green'] [] = 'Значение зеленого не должно быть больше 255';
         }
         $this->green = $greenValue;
     }
     private function setBlueValue(int $blueValue):void
     {
         if ($blueValue < 0) {
-            $this->errorBag['red'] [] = 'Значение синего не должно быть меньше нуля';
+            $this->errorBag['blue'] [] = 'Значение синего не должно быть меньше нуля';
         }
         if ($blueValue > 255) {
-            $this->errorBag['red'] [] = 'Значение синего не должно быть больше 255';
+            $this->errorBag['blue'] [] = 'Значение синего не должно быть больше 255';
         }
         $this->blue = $blueValue;
     }
@@ -107,7 +107,7 @@ class Color
 
 }
 
-$color = new Color(200, 200, 200);
+$color = new Color(300, 300, 200);
 $color1 = new Color(100, 100, 100);
 echo $color->View();
 echo '<br>';
