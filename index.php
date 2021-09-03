@@ -5,38 +5,33 @@ class Color
     private int $green;
     private int $blue;
 
-    private $errorBag = [
-    'red' => [],
-    'green' => [],
-    'blue' => []
-    ];
     private function setRed(int $redValue):void
     {
         if ($redValue < 0) {
-            $this->errorBag['red'] [] = 'Значение красного не должно быть меньше нуля';
+            exit('Значение красного не должно быть меньше нуля');
         }
         if ($redValue > 255) {
-            $this->errorBag['red'] [] = 'Значение красного не должно быть больше 255';
+           exit('Значение красного не должно быть больше 255');
         }
         $this->red = $redValue;
     }
     private function setGreen(int $greenValue):void
     {
         if ($greenValue < 0) {
-            $this->errorBag['green'] [] = 'Значение зеленого не должно быть меньше нуля';
+            exit('Значение зеленого не должно быть меньше нуля');
         }
         if ($greenValue > 255) {
-            $this->errorBag['green'] [] = 'Значение зеленого не должно быть больше 255';
+            exit('Значение зеленого не должно быть больше 255');
         }
         $this->green = $greenValue;
     }
     private function setBlue(int $blueValue):void
     {
         if ($blueValue < 0) {
-            $this->errorBag['blue'] [] = 'Значение синего не должно быть меньше нуля';
+            exit('Значение синего не должно быть меньше нуля');
         }
         if ($blueValue > 255) {
-            $this->errorBag['blue'] [] = 'Значение синего не должно быть больше 255';
+            exit('Значение синего не должно быть больше 255');
         }
         $this->blue = $blueValue;
     }
@@ -59,22 +54,6 @@ class Color
         $this->setRed($_red);
         $this->setGreen($_green);
         $this->setBlue($_blue);
-        $this ->checkErrors();
-    }
-    private function checkErrors():void
-    {
-        $errorsCounter = count(
-            $this->errorBag['red'] +
-            $this->errorBag['green'] +
-            $this->errorBag['blue']
-        );
-        if ($errorsCounter > 0) {
-            foreach ($this->errorBag as $item){
-                foreach ($item as $item_item )
-                echo $item_item.'<br>';
-            }
-            exit();
-        }
     }
 
     public function equals (Color $value) :bool {
@@ -93,9 +72,9 @@ class Color
         $buffGreen = $valueColor->getGreen();
         $buffBlue = $valueColor->getBlue();
 
-        $buffRed = ($buffRed + $this->getRed()) / 2;
-        $buffGreen = ($buffGreen + $this->getGreen()) / 2;
-        $buffBlue = ($buffBlue + $this->getBlue()) / 2;
+        $buffRed = intdiv($buffRed + $this->getRed(),2);
+        $buffGreen = intdiv($buffGreen + $this->getGreen(),2);
+        $buffBlue = intdiv($buffBlue + $this->getBlue(),2);
 
         return (new Color ($buffRed, $buffGreen, $buffBlue));
     }
