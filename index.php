@@ -1,6 +1,6 @@
 <?php
 
-class MyColor
+class Color
 {
     private int $red;
     private int $green;
@@ -82,7 +82,7 @@ class MyColor
         return 'red= '.$this->getRedValue().' green = '.$this->getGreenValue().' blue = '.$this->getBlueValue();
     }
 
-    public function equals (MyColor $value) :bool {
+    public function equals (Color $value) :bool {
         return (
             $this->red == $value->getRedValue()
             &&
@@ -92,15 +92,30 @@ class MyColor
             );
     }
 
+    public function mix(Color $valueColor): Color
+    {
+        $buffRed = $valueColor->getRedValue();
+        $buffGreen = $valueColor->getGreenValue();
+        $buffBlue = $valueColor->getBlueValue();
+
+        $buffRed = ($buffRed + $this->getRedValue()) / 2;
+        $buffGreen = ($buffGreen + $this->getGreenValue()) / 2;
+        $buffBlue = ($buffBlue + $this->getBlueValue()) / 2;
+
+        return (new Color ($buffRed, $buffGreen, $buffBlue));
+    }
+
 }
 
-$color = new MyColor(200, 200, 200);
-$color1 = new MyColor(200, 200, 300);
+$color = new Color(200, 200, 200);
+$color1 = new Color(100, 100, 100);
 echo $color->View();
 echo '<br>';
-echo $color->equals($color1);
+//echo $color->equals($color1);
 
-//$mixedColor = $color->mix(new Color(100, 100, 100));
+$mixedColor = $color->mix(new Color(100, 100, 100));
+echo $mixedColor->View();
+
 //$mixedColor->getRed(); // 150
 //$mixedColor->getGreen(); // 150
 //$mixedColor->getBlue(); // 150
