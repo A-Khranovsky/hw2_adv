@@ -1,5 +1,4 @@
 <?php
-
 class Color
 {
     private int $red;
@@ -102,7 +101,6 @@ class Color
     }
 
 }
-
 $color = new Color(200, 200, 200);
 $mixedColor = $color->mix(new Color(100, 100, 100));
 $mixedColor->getRed(); // 150
