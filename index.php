@@ -11,7 +11,7 @@ class Color
     'green' => [],
     'blue' => []
     ];
-    private function setRedValue(int $redValue):void
+    private function setRed(int $redValue):void
     {
         if ($redValue < 0) {
             $this->errorBag['red'] [] = 'Значение красного не должно быть меньше нуля';
@@ -21,7 +21,7 @@ class Color
         }
         $this->red = $redValue;
     }
-    private function setGreenValue(int $greenValue):void
+    private function setGreen(int $greenValue):void
     {
         if ($greenValue < 0) {
             $this->errorBag['green'] [] = 'Значение зеленого не должно быть меньше нуля';
@@ -31,7 +31,7 @@ class Color
         }
         $this->green = $greenValue;
     }
-    private function setBlueValue(int $blueValue):void
+    private function setBlue(int $blueValue):void
     {
         if ($blueValue < 0) {
             $this->errorBag['blue'] [] = 'Значение синего не должно быть меньше нуля';
@@ -42,24 +42,24 @@ class Color
         $this->blue = $blueValue;
     }
 
-    public function getRedValue():int
+    public function getRed():int
     {
         return $this->red;
     }
-    public function getGreenValue():int
+    public function getGreen():int
     {
         return $this->green;
     }
-    public function getBlueValue():int
+    public function getBlue():int
     {
         return $this->blue;
     }
 
     public function __construct(int $_red, int $_green, int $_blue)
     {
-        $this->setRedValue($_red);
-        $this->setGreenValue($_green);
-        $this->setBlueValue($_blue);
+        $this->setRed($_red);
+        $this->setGreen($_green);
+        $this->setBlue($_blue);
         $this ->checkErrors();
     }
     private function checkErrors():void
@@ -78,49 +78,37 @@ class Color
         }
     }
 
-    public function View(){
-        return 'red= '.$this->getRedValue().' green = '.$this->getGreenValue().' blue = '.$this->getBlueValue();
-    }
-
     public function equals (Color $value) :bool {
         return (
-            $this->red == $value->getRedValue()
+            $this->red == $value->getRed()
             &&
-            $this->green == $value->getGreenValue()
+            $this->green == $value->getGreen()
             &&
-            $this->blue == $value->getBlueValue()
+            $this->blue == $value->getBlue()
             );
     }
 
     public function mix(Color $valueColor): Color
     {
-        $buffRed = $valueColor->getRedValue();
-        $buffGreen = $valueColor->getGreenValue();
-        $buffBlue = $valueColor->getBlueValue();
+        $buffRed = $valueColor->getRed();
+        $buffGreen = $valueColor->getGreen();
+        $buffBlue = $valueColor->getBlue();
 
-        $buffRed = ($buffRed + $this->getRedValue()) / 2;
-        $buffGreen = ($buffGreen + $this->getGreenValue()) / 2;
-        $buffBlue = ($buffBlue + $this->getBlueValue()) / 2;
+        $buffRed = ($buffRed + $this->getRed()) / 2;
+        $buffGreen = ($buffGreen + $this->getGreen()) / 2;
+        $buffBlue = ($buffBlue + $this->getBlue()) / 2;
 
         return (new Color ($buffRed, $buffGreen, $buffBlue));
     }
 
 }
 
-$color = new Color(300, 300, 200);
-$color1 = new Color(100, 100, 100);
-echo $color->View();
-echo '<br>';
-//echo $color->equals($color1);
-
+$color = new Color(200, 200, 200);
 $mixedColor = $color->mix(new Color(100, 100, 100));
-echo $mixedColor->View();
+$mixedColor->getRed(); // 150
+$mixedColor->getGreen(); // 150
+$mixedColor->getBlue(); // 150
 
-//$mixedColor->getRed(); // 150
-//$mixedColor->getGreen(); // 150
-//$mixedColor->getBlue(); // 150
-//
-//if (!$color->equals($mixedColor)) {
-//    echo 'Цвета не равні';
-//}
-?>
+if (!$color->equals($mixedColor)) {
+    echo 'Цвета не равні';
+}
